@@ -19,7 +19,10 @@ The data is available freely from the great website https://data.public.lu
 
 ```{r}
 library(tidyverse)
-findel_rain<-read_csv("https://data.public.lu/fr/datasets/daily-meteorological-parameters-luxembourg-findel-airport-wmo-id-06590/")
+findel_rain <- read_csv("data/06590-dailyparams-luxfindel-1947-ongoing.csv", locale=locale(encoding="latin1"))
+
+findel_rain
+
 ```
 
 ```{block, opts.label = "tip"}
