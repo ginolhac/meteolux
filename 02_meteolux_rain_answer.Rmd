@@ -1,0 +1,283 @@
+---
+title: "My answers"
+author: "My name"
+date: "2022-04-28"
+output: html_document
+---
+
+
+
+
+> Explore meteological data from the Findel station from 1947: Temperatures and rain precipitations
+
+The data is available freely from the great website https://data.public.lu
+
+## Fetch data
+
+
+##### Download the CSV located at data.public.lu as [daily-meteorological-findel](https://data.public.lu/fr/datasets/daily-meteorological-parameters-luxembourg-findel-airport-wmo-id-06590/). Assign the name `findel_rain`
+
+```{block, opts.label = "tip"}
+As usual, the values don't come as easy as it should. The supplied header is poorly encoded.
+
+It is suggested to skip the first line and supply your own header based on the **Parameter description**:
+
+
+- DXT (°C): DAILY MAXIMUM AIR TEMPERATURE AT 2 M – 23:46 UTC (D-1) TO 23:45 UTC (D)
+- DNT (°C): DAILY MINIMUM AIR TEMPERATURE AT 2 M – 23:46 UTC (D-1) TO 23:45 UTC (D)
+- DRR06_06 (mm): DAILY AMOUNT OF PRECIPITATION – 05:46 UTC (D) TO 05:45 UTC (D+1)
+
+For the date format, use a proper `date` specification with `col_date()` to read this column properly
+```
+
+```{r}
+# Write your answer here
+```
+
+
+##### Check the last lines of the tibble, which complete month have you?
+
+```{r}
+# Write your answer here
+```
+
+
+##### Check if we have all measurements per year.
+
+```{r}
+# Write your answer here
+```
+
+
+## Exploratory plots
+
+##### Use `GGally::ggpairs` on the non-date columns to have a glance of the date
+
+```{r}
+# Write your answer here
+```
+
+
+##### Apart from the obvious relation between min/max temperatures within a day, why temperatures appear bimodal?
+
+
+```{block, opts.label = "tip"}
+If you need some insights to find out what is going on, you could display the max temperature distribution per season.
+
+To do so:
+
+- Extract the month from the `date` column, `ludbridate::month(date, label = TRUE, abbr = TRUE)` does a great job
+- Collapse month per season, like `Winter = c("Dec", "Jan", "Feb")` and so forth
+- Fill distribution per `season`
+
+Conclude
+```
+
+
+
+```{r}
+# Write your answer here
+```
+
+
+##### Using the same new `season` column you created before, display the distribution per season of the daily temperature difference 
+
+- Which season has the minimal temperature difference within a day?
+
+```{r}
+# Write your answer here
+```
+
+
+
+## Temperatures per decades
+
+#### Break dates by decades
+
+```{block, opts.label = "tip"}
+`lubridate::year()` extracts a year from a date format, but then for creating a decade,
+
+you need to think of working with the relevant module (`%%`).
+```
+
+
+Once you have the decades, you should expect to have as number of observations:
+```
+ decade     n
+   <dbl> <int>
+1   1940  1096
+2   1950  3652
+3   1960  3653
+4   1970  3652
+    [...]
+```
+
+```{r}
+# Write your answer here
+```
+
+
+#### Plot the mean temperatures, minimum and maximum per decade
+
+Now that you know how to create the decades, you can summarise by them both
+ minimum and maximum temperatures.
+ 
+```{block, opts.label = "tip"}
+Keep only the complete decades, from 1950, to 2010.
+
+Once summarised, you need to pivot the data to have them tidy for plotting
+```
+
+```{r}
+# Write your answer here
+```
+
+
+
+##### How many Celsius degrees increase can you estimate over 60 years in Luxembourg
+
+```{r}
+# Write your answer here
+```
+
+
+
+## Rain precipitations
+
+##### On which day, did the Findel station observe the top rain quantity?
+
+
+```{r}
+# Write your answer here
+```
+
+```{r}
+# Write your answer here
+```
+
+
+
+
+
+
+##### Reproduce this [plot](https://twitter.com/Francois_Jobard/status/1440246462361726980) by François Jobart for the Findel station
+
+![](https://pbs.twimg.com/media/E_zGK4nVUAsL7Du?format=png&name=900x900)
+
+
+```{block, opts.label = "tip"}
+We will follow the advice of [Luca Mathias](https://twitter.com/meteomathias/status/1440681768747626503?s=20) a luxembourgish meteorologist. For the summer, we keep June to August. It makes the filtering easier too.
+
+Then compute per year, the sum of precipitations and the mean of min/max temperatures.
+
+Display the mean temperature / rain for the period 1991-2020 as one big dot.
+
+You can let down the dashed lines of "arid / semi-arid" descriptions.
+```
+
+```{r}
+# Write your answer here
+```
+
+
+##### What can you conclude?
+
+```{r}
+# Write your answer here
+```
+
+
+
+##### Compute and plot the number of tropical nights/frozen days per year 
+
+```{block, opts.label = "tip"}
+A tropical night is defined as a minimal temperature > 20°C
+
+Frozen means that the maximum temperature remain below 0°C
+
+You could add a linear trend with `geom_smooth()` to highlight the obvious
+```
+
+```{r}
+# Write your answer here
+```
+
+
+
+
+
+##### Monthly temperatures from 2010-2021 to a 30 years referential period
+
+We would like to mimic another plot by [François Jobart](https://twitter.com/Francois_Jobard/status/1479708565849923586?s=20&t=rqxYEY6G36TDe93vnWcnzQ)
+
+![](https://pbs.twimg.com/media/FIj6-k2WUAMy4zL?format=png&name=medium)
+
+The fact that 2021 alone has some standard deviation is weird. We will use 2010-2021 as test period
+
+```{block, opts.label = "tip"}
+- Start by selecting the years 1951-1980 and the last decade 2012-2021.
+- Then categorised the `year` for being either the reference or the test decade
+- Extract the day in year using ludridate::yday()`
+- Compute both mean / std dev for the mean daily temperature per category and day in year
+- Use `geom_ribbon()` for the std deviation
+```
+
+```{r}
+# Write your answer here
+```
+
+
+We see that the plot shows a lot of daily variation.
+
+However, the recent decade appears above the 30 years reference almost all year.
+
+##### Display the distribution of reference/last decade and compute if the temperatures are significantly different. Justify your answer
+
+```{r}
+# Write your answer here
+```
+
+
+
+##### Smooth the temperature and standard deviation with a rolling mean
+
+The details of how the smoothing was done is not supplied. But using a rolling mean we can obtain something close.
+
+```{block, opts.label = "tip"}
+Per reference/last decade, smooth use `slider::slide_mean` both the mean / sd temperatures.
+
+You need to play with the `before` argument to find which period seems appropriate.
+
+```
+
+```{r}
+# Write your answer here
+```
+
+
+
+
+## Distribution of rains
+
+```{r}
+# Write your answer here
+```
+
+
+##### Applied the same procedure for the 2 references but on the rain precipitations
+
+- Plot the distribution of the rain precipitations per reference (`ggbeeswarm::geom_quasirandom()` is great)
+- Test if the means of both the 30 years reference and last decade are different
+- Conclude
+
+```{r}
+# Write your answer here
+```
+
+
+
+## Acknowledgements
+
+- [Luca Mathias](https://twitter.com/meteomathias)
+- [François Jobart](https://twitter.com/Francois_Jobard)
+
