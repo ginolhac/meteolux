@@ -1,6 +1,6 @@
 ---
-title: "My answers"
-author: "My name"
+title: "Meteolux"
+author: "Gonella Luca, Bodart Céline, Al Sawaf Haya"
 date: "2022-04-28"
 output: html_document
 ---
@@ -16,6 +16,11 @@ The data is available freely from the great website https://data.public.lu
 
 
 ##### Download the CSV located at data.public.lu as [daily-meteorological-findel](https://data.public.lu/fr/datasets/daily-meteorological-parameters-luxembourg-findel-airport-wmo-id-06590/). Assign the name `findel_rain`
+
+```{r}
+library(tidyverse)
+findel_rain<-read_csv("https://data.public.lu/fr/datasets/daily-meteorological-parameters-luxembourg-findel-airport-wmo-id-06590/")
+```
 
 ```{block, opts.label = "tip"}
 As usual, the values don't come as easy as it should. The supplied header is poorly encoded.
