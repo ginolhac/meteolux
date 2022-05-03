@@ -35,7 +35,7 @@ For the date format, use a proper `date` specification with `col_date()` to read
 ```
 
 ```{r}
-# Write your answer here
+findel_rain
 ```
 
 ##### Check the last lines of the tibble, which complete month have you?
