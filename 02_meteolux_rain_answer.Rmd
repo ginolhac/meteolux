@@ -35,7 +35,8 @@ For the date format, use a proper `date` specification with `col_date()` to read
 ```
 
 ```{r}
-findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" ))
+findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" )) %>% rename("T°max (°C) " = "DXT (°C)", "T°min (°C)" = "DNT (°C)", "Rain (mm)" = "DRR06_06 (mm)")
+
 ```
 
 ```{r}
