@@ -16,6 +16,7 @@ The data is available freely from the great website <https://data.public.lu>
 
 ```{r, include=FALSE}
 library(tidyverse)
+library(ggplot2)
 ```
 
 ```{r}
