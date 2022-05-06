@@ -50,7 +50,10 @@ Nous avons les valeurs de janvier 1947 à mars 2022
 ##### Check if we have all measurements per year.
 
 ```{r}
-# Write your answer here
+
+(2022-1947)*365+90+19
+
+
 ```
 
 ## Exploratory plots
@@ -58,7 +61,7 @@ Nous avons les valeurs de janvier 1947 à mars 2022
 ##### Use `GGally::ggpairs` on the non-date columns to have a glance of the date
 
 ```{r}
-# Write your answer here
+GGally::ggpairs(findel_rain %>% select(-DATE))
 ```
 
 ##### Apart from the obvious relation between min/max temperatures within a day, why temperatures appear bimodal?
