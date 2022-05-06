@@ -43,14 +43,12 @@ findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%
 
 ##### Check the last lines of the tibble, which complete month have you?
 
-```{r}
-# Write your answer here
-```
+Nous avons les valeurs de janvier 1947 à mars 2022
 
 ##### Check if we have all measurements per year.
 
 ```{r}
-# Write your answer here
+(2022-1947)*365+90+19
 ```
 
 ## Exploratory plots
@@ -58,7 +56,7 @@ findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%
 ##### Use `GGally::ggpairs` on the non-date columns to have a glance of the date
 
 ```{r}
-GGally::ggpairs(findel_rain)
+GGally::ggpairs(findel_rain %>% select(-DATE))
 ```
 
 ##### Apart from the obvious relation between min/max temperatures within a day, why temperatures appear bimodal?
