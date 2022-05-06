@@ -5,6 +5,8 @@ date: "2022-04-28"
 output: html_document
 ---
 
+
+
 > Explore meteological data from the Findel station from 1947: Temperatures and rain precipitations
 
 The data is available freely from the great website <https://data.public.lu>
@@ -13,8 +15,12 @@ The data is available freely from the great website <https://data.public.lu>
 
 ##### Download the CSV located at data.public.lu as [daily-meteorological-findel](https://data.public.lu/fr/datasets/daily-meteorological-parameters-luxembourg-findel-airport-wmo-id-06590/). Assign the name `findel_rain`
 
-```{r}
+```{r, include=FALSE}
 library(tidyverse)
+```
+
+```{r}
+
 findel_rain <- read_csv("data/06590-dailyparams-luxfindel-1947-ongoing.csv", locale=locale(encoding="latin1"))
 
 findel_rain
