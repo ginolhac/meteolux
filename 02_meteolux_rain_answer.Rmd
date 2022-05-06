@@ -6,7 +6,6 @@ output: html_document
 ---
 
 
-
 > Explore meteological data from the Findel station from 1947: Temperatures and rain precipitations
 
 The data is available freely from the great website <https://data.public.lu>
