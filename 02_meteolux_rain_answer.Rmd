@@ -8,6 +8,7 @@ output: html_document
 ```{r, include=FALSE}
 library(tidyverse)
 library(ggplot2)
+library(GGally)
 ```
 
 > Explore meteological data from the Findel station from 1947: Temperatures and rain precipitations
@@ -40,8 +41,6 @@ For the date format, use a proper `date` specification with `col_date()` to read
 findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" )) %>% rename("T°max (°C) " = "DXT (°C)", "T°min (°C)" = "DNT (°C)", "Rain (mm)" = "DRR06_06 (mm)")
 ```
 
-
-
 ##### Check the last lines of the tibble, which complete month have you?
 
 ```{r}
@@ -59,7 +58,7 @@ findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%
 ##### Use `GGally::ggpairs` on the non-date columns to have a glance of the date
 
 ```{r}
-# Write your answer here
+GGally::ggpairs(findel_rain)
 ```
 
 ##### Apart from the obvious relation between min/max temperatures within a day, why temperatures appear bimodal?
