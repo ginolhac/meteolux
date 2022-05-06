@@ -40,9 +40,7 @@ For the date format, use a proper `date` specification with `col_date()` to read
 findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" )) %>% rename("T°max (°C) " = "DXT (°C)", "T°min (°C)" = "DNT (°C)", "Rain (mm)" = "DRR06_06 (mm)")
 ```
 
-```{r}
-findel_rain <- findel_rain[-c(1), ]
-```
+
 
 ##### Check the last lines of the tibble, which complete month have you?
 
