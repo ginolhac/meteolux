@@ -1,6 +1,6 @@
 ---
 title: "Meteolux"
-author: " Bodart Céline, Al Sawaf Haya,Gonella Luca "
+author: "Bodart Céline, Al Sawaf Haya,Gonella Luca"
 date: "2022-04-28"
 output: html_document
 ---
