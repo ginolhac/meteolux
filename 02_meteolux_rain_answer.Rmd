@@ -5,6 +5,10 @@ date: "2022-04-28"
 output: html_document
 ---
 
+```{r, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+```
 
 > Explore meteological data from the Findel station from 1947: Temperatures and rain precipitations
 
@@ -14,17 +18,9 @@ The data is available freely from the great website <https://data.public.lu>
 
 ##### Download the CSV located at data.public.lu as [daily-meteorological-findel](https://data.public.lu/fr/datasets/daily-meteorological-parameters-luxembourg-findel-airport-wmo-id-06590/). Assign the name `findel_rain`
 
-```{r, include=FALSE}
-library(tidyverse)
-library(ggplot2)
-```
-
 ```{r}
-
 findel_rain <- read_csv("data/06590-dailyparams-luxfindel-1947-ongoing.csv", locale=locale(encoding="latin1"))
-
 findel_rain
-
 ```
 
 ```{block, opts.label = "tip"}
@@ -42,7 +38,6 @@ For the date format, use a proper `date` specification with `col_date()` to read
 
 ```{r}
 findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" )) %>% rename("T°max (°C) " = "DXT (°C)", "T°min (°C)" = "DNT (°C)", "Rain (mm)" = "DRR06_06 (mm)")
-
 ```
 
 ```{r}
