@@ -94,13 +94,23 @@ ggplot(aes(x = Tmax, fill = SEASON, colour = SEASON)) +
 
 -   Which season has the minimal temperature difference within a day?
 
+Deux façons de voir la chose: le record de la plus petite différence ou via la moyenne des diff de T°
 ```{r}
 select(findel_rain, SEASON, Tmax, Tmin) %>% 
     mutate(Tdiff = Tmax-Tmin) %>% 
+    filter(Tdiff<1)%>%
     arrange(Tdiff)
 
 ```
-Les saisons les plus froides sont l'hiver et l'automne 
+
+```{r}
+mutate(findel_rain,Tdiff = Tmax-Tmin) %>% 
+    select(SEASON, Tdiff) %>% 
+    group_by(SEASON) %>% 
+    summarise(mean(Tdiff))
+    
+    
+```
 
 ## Temperatures per decades
 
