@@ -38,7 +38,7 @@ For the date format, use a proper `date` specification with `col_date()` to read
 ```
 
 ```{r}
-findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" )) %>% rename("T°max (°C)" = "DXT (°C)", "T°min (°C)" = "DNT (°C)", "Rain (mm)" = "DRR06_06 (mm)")
+findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" )) %>% rename("Tmax" = "DXT (°C)", "Tmin" = "DNT (°C)", "Rain" = "DRR06_06 (mm)")
 ```
 
 ##### Check the last lines of the tibble, which complete month have you?
@@ -84,7 +84,7 @@ findel_rain <- findel_rain %>% mutate(MONTH=findel_rain$DATE %>% lubridate::mont
 
 ```{r}
 findel_rain %>% 
-ggplot(aes(x = `T°max (°C)`, fill = SEASON, colour = SEASON)) +
+ggplot(aes(x = Tmax, fill = SEASON, colour = SEASON)) +
   geom_density(alpha = 0.5)
 ```
 
@@ -95,8 +95,12 @@ ggplot(aes(x = `T°max (°C)`, fill = SEASON, colour = SEASON)) +
 -   Which season has the minimal temperature difference within a day?
 
 ```{r}
+select(findel_rain, SEASON, Tmax, Tmin) %>% 
+    mutate(Tdiff = Tmax-Tmin) %>% 
+    arrange(Tdiff)
 
 ```
+Les saisons les plus froides sont l'hiver et l'automne 
 
 ## Temperatures per decades
 
