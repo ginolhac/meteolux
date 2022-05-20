@@ -106,7 +106,7 @@ select(findel_rain, SEASON, Tmax, Tmin) %>%
 ```{r}
 mutate(findel_rain,Tdiff = Tmax-Tmin) %>% 
     select(SEASON, Tdiff) %>% 
-    group_by(SEASON) %>% 
+    group_by(SEASON) %>%
     summarise(mean(Tdiff))
     
     
@@ -121,7 +121,7 @@ mutate(findel_rain,Tdiff = Tmax-Tmin) %>%
 
 you need to think of working with the relevant module (`%%`).
 ```
-
+ 
 Once you have the decades, you should expect to have as number of observations:
 
      decade     n
@@ -131,10 +131,13 @@ Once you have the decades, you should expect to have as number of observations:
     3   1960  3653
     4   1970  3652
         [...]
-
 ```{r}
-# Write your answer here
-```
+floor_decade    = function(value){ return(value - value %% 10) }
+findel_rain <- findel_rain %>% mutate(YEAR = findel_rain$DATE %>% lubridate::year())
+
+findel_rain %>% mutate(DECADE = floor_decade(YEAR))
+                       
+````
 
 #### Plot the mean temperatures, minimum and maximum per decade
 
