@@ -74,7 +74,14 @@ Conclude
 ```
 
 ```{r}
-# Write your answer here
+findel_rain <- findel_rain %>%mutate(MONTH=findel_rain$DATE %>% lubridate::month(label = TRUE, abbr = TRUE))
+```
+
+```{r}
+Winter = c("Dec", "Jan", "Feb")
+Summer = c("Jun", "Jul", "Aug")
+Spring = c("Mar", "Apr", "May")
+Fall = c("Sep", "Oct", "Nov")
 ```
 
 ##### Using the same new `season` column you created before, display the distribution per season of the daily temperature difference
@@ -82,7 +89,7 @@ Conclude
 -   Which season has the minimal temperature difference within a day?
 
 ```{r}
-# Write your answer here
+
 ```
 
 ## Temperatures per decades
