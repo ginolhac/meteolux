@@ -38,7 +38,7 @@ For the date format, use a proper `date` specification with `col_date()` to read
 ```
 
 ```{r}
-findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" )) %>% rename("T°max (°C) " = "DXT (°C)", "T°min (°C)" = "DNT (°C)", "Rain (mm)" = "DRR06_06 (mm)")
+findel_rain <- findel_rain %>% mutate(DATE= as.Date(findel_rain$DATE, format= "%d.%m.%Y" )) %>% rename("T°max (°C)" = "DXT (°C)", "T°min (°C)" = "DNT (°C)", "Rain (mm)" = "DRR06_06 (mm)")
 ```
 
 ##### Check the last lines of the tibble, which complete month have you?
@@ -74,15 +74,21 @@ Conclude
 ```
 
 ```{r}
-findel_rain <- findel_rain %>%mutate(MONTH=findel_rain$DATE %>% lubridate::month(label = TRUE, abbr = TRUE))
+findel_rain <- findel_rain %>% mutate(MONTH=findel_rain$DATE %>% lubridate::month(label = TRUE, abbr = TRUE), SEASON=fct_collapse(MONTH, 
+                                                                                                                                  Winter = c("Dec", "Jan", "Feb"),
+                                                                                                                                  Summer = c("Jun", "Jul", "Aug"), 
+                                                                                                                                  Spring = c("Mar", "Apr", "May"), 
+                                                                                                                                  Fall = c("Sep", "Oct", "Nov"))) 
+
 ```
 
 ```{r}
-Winter = c("Dec", "Jan", "Feb")
-Summer = c("Jun", "Jul", "Aug")
-Spring = c("Mar", "Apr", "May")
-Fall = c("Sep", "Oct", "Nov")
+findel_rain %>% 
+ggplot(aes(x = `T°max (°C)`, fill = SEASON, colour = SEASON)) +
+  geom_density(alpha = 0.5)
 ```
+
+
 
 ##### Using the same new `season` column you created before, display the distribution per season of the daily temperature difference
 
